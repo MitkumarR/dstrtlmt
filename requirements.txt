@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+redis[asyncio]
+prometheus-client
+httpx
+pytest
+pytest-asyncio
