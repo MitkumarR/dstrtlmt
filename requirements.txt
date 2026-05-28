@@ -5,3 +5,4 @@ prometheus-client
 httpx
 pytest
 pytest-asyncio
+pydantic-settings
