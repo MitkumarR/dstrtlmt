@@ -1,0 +1,73 @@
+{
+  "title": "Rate Limiter Metrics",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "API Request Rate (Allowed vs Blocked)",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "sum by (status) (rate(ratelimiter_requests_total[1m]))",
+          "legendFormat": "{{status}} requests",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          }
+        }
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Average Request Latency",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "rate(ratelimiter_request_duration_seconds_sum[1m]) / rate(ratelimiter_request_duration_seconds_count[1m])",
+          "legendFormat": "Average Latency (s)",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "s",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          }
+        }
+      }
+    },
+    {
+      "type": "stat",
+      "title": "Active Clients (Last 1m)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "expr": "count(count by (client_key) (rate(ratelimiter_requests_total[1m]) > 0))",
+          "legendFormat": "Unique Clients",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "mappings": []
+        }
+      }
+    }
+  ]
+}
