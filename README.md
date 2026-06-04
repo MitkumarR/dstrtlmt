@@ -4,6 +4,10 @@ A scalable, distributed rate-limiting API built with FastAPI and Redis, complete
 
 ## Architecture
 
+<div align="center">
+  <img src="distributed_rate_limter_architecture_diagram.png" alt="Architecture Diagram" width="100%" />
+</div>
+
 This project is built using a modern microservices stack and orchestrated with Docker Compose:
 
 - **FastAPI**: The core web framework serving the API.
